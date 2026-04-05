@@ -174,13 +174,16 @@ check_environment() {
         fi
     fi
     
-    # 检查poetry
+    # 检查uv
     if [[ "$INSTALL_BACKEND" == true ]]; then
-        if command -v poetry &> /dev/null; then
+        if command -v uv &> /dev/null; then
+            BACKEND_PM="uv"
+            print_info "后端包管理器: uv"
+        elif command -v poetry &> /dev/null; then
             BACKEND_PM="poetry"
-            print_info "后端包管理器: poetry"
+            print_info "后端包管理器: poetry (建议使用uv)"
         else
-            print_warning "未找到poetry，将使用pip安装后端依赖"
+            print_warning "未找到uv，将使用pip安装后端依赖"
             BACKEND_PM="pip"
         fi
     fi
@@ -244,6 +247,25 @@ install_backend_deps() {
     
     # 根据包管理器安装依赖
     case $BACKEND_PM in
+        uv)
+            print_info "使用uv安装依赖..."
+            
+            if [[ "$INSTALL_DEV_DEPS" == true ]]; then
+                print_info "安装所有依赖（包括开发依赖）..."
+                uv pip install -e .
+            else
+                print_info "安装生产依赖..."
+                uv pip install --no-dev -e .
+            fi
+            
+            if [[ $? -eq 0 ]]; then
+                print_success "uv依赖安装成功"
+            else
+                print_error "uv依赖安装失败"
+                cd ..
+                return 1
+            fi
+            ;;
         poetry)
             print_info "使用poetry安装依赖..."
             

@@ -127,21 +127,24 @@ check_dependencies() {
         }
     fi
     
-    # 检查poetry
-    if ! command -v poetry &> /dev/null; then
-        print_warning "未找到poetry，尝试使用pip安装依赖..."
+    # 检查uv
+    if command -v uv &> /dev/null; then
+        print_info "使用uv安装依赖..."
+        uv pip install -e .
+    elif command -v poetry &> /dev/null; then
+        print_info "使用poetry安装依赖..."
+        poetry install --no-root
+    else
+        print_warning "未找到uv或poetry，尝试使用pip安装依赖..."
         
         # 检查requirements.txt
         if [[ -f "requirements.txt" ]]; then
             print_info "使用requirements.txt安装依赖..."
             pip install -r requirements.txt
         else
-            print_error "未找到requirements.txt，请先安装poetry或创建requirements.txt"
+            print_error "未找到requirements.txt，请先安装uv、poetry或创建requirements.txt"
             exit 1
         fi
-    else
-        print_info "使用poetry安装依赖..."
-        poetry install --no-root
     fi
 }
 
