@@ -1,106 +1,55 @@
 {
   "version": 2,
-  "name": "ai-haiguitang-fullstack",
-  "public": true,
-  
+  "build": {
+    "env": {
+      "PIP_BREAK_SYSTEM_PACKAGES": "1",
+      "PYTHON_VERSION": "3.12"
+    }
+  },
+  "functions": {
+    "backend/app.py": {
+      "runtime": "@vercel/python@3.12",
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
   "builds": [
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "installCommand": "cd frontend && npm install --production",
+        "buildCommand": "cd frontend && npm run build",
+        "distDir": "frontend/dist"
       }
     },
     {
-      "src": "api/**/*.py",
-      "use": "@vercel/python"
+      "src": "backend/app/main.py",
+      "use": "@vercel/python@3.12",
+      "config": {
+        "installCommand": "cd backend && pip install -r requirements.txt --no-cache-dir --break-system-packages"
+      }
     }
   ],
-  
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/backend/app/main.py",
+      "headers": {
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))$",
+      "dest": "/frontend/dist/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "dest": "/frontend/dist/index.html"
     }
-  ],
-  
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
-    }
-  ],
-  
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization, X-User-ID"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        }
-      ]
-    }
-  ],
-  
-  "functions": {
-    "api/**/*.py": {
-      "maxDuration": 10,
-      "memory": 1024,
-      "runtime": "python3.9"
-    }
-  },
-  
-  "env": {
-    "VITE_API_BASE_URL": "@vite_api_base_url",
-    "ENVIRONMENT": "production"
-  },
-  
-  "buildCommand": "npm run build-all",
-  "outputDirectory": "frontend/dist",
-  "framework": "vite",
-  "installCommand": "npm install-all",
-  "devCommand": "npm run dev-all",
-  "regions": ["sin1"]
+  ]
+
 }
