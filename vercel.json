@@ -2,8 +2,7 @@
   "version": 2,
   "build": {
     "env": {
-      "PIP_BREAK_SYSTEM_PACKAGES": "1",
-      "PYTHON_VERSION": "3.12"
+      "PIP_BREAK_SYSTEM_PACKAGES": "1"
     }
   },
   "builds": [
@@ -11,38 +10,16 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "installCommand": "cd frontend && npm install --production",
-        "buildCommand": "cd frontend && npm run build",
-        "distDir": "frontend/dist"
+        "distDir": "dist"
       }
     },
     {
       "src": "backend/app/app.py",
-      "use": "@vercel/python@3.12",
-      "config": {
-        "installCommand": "ls -al && cd backend && pip install -r requirements.txt --no-cache-dir --break-system-packages"
-      }
+      "use": "@vercel/python@3.12"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/app/app.py",
-      "headers": {
-        "Cache-Control": "no-cache"
-      }
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))$",
-      "dest": "/frontend/dist/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/dist/index.html"
-    }
+    { "src": "/api/(.*)", "dest": "/backend/app/app.py" },
+    { "src": "/(.*)", "dest": "/frontend/dist/index.html" }
   ]
-
 }
