@@ -24,7 +24,7 @@
       }
     },
     {
-      "src": "backend/app/main.py",
+      "src": "backend/app/app.py",
       "use": "@vercel/python@3.12",
       "config": {
         "installCommand": "cd backend && pip install -r requirements.txt --no-cache-dir --break-system-packages"
@@ -34,7 +34,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/app/main.py",
+      "dest": "/backend/app/app.py",
       "headers": {
         "Cache-Control": "no-cache"
       }
