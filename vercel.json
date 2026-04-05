@@ -6,13 +6,6 @@
       "PYTHON_VERSION": "3.12"
     }
   },
-  "functions": {
-    "backend/app.py": {
-      "runtime": "@vercel/python@3.12",
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
   "builds": [
     {
       "src": "frontend/package.json",
