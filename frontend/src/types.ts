@@ -27,9 +27,9 @@ export interface TSoup {
   id: string
   title: string
   surface: string
-  bottom: string
-  key_facts: string[]
-  difficulty: '简单' | '中等' | '困难'
+  bottom?: string
+  key_facts?: string[]
+  difficulty: string
   category: string
   estimatedTime: string
   playedCount: number

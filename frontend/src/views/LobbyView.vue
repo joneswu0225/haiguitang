@@ -77,6 +77,13 @@ const soups = ref<TSoup[]>([
     id: '1',
     title: '消失的乘客',
     surface: '一名乘客在火车上消失了，但火车一直在行驶，没有人看到有人下车。',
+    bottom: '乘客是一名魔术师，他在火车行驶时表演了消失魔术，实际上他藏在了行李车厢。',
+    key_facts: [
+      '乘客是魔术师',
+      '火车一直在行驶',
+      '没有人看到下车',
+      '藏在行李车厢'
+    ],
     difficulty: '简单',
     category: '推理',
     estimatedTime: '10分钟',
@@ -86,6 +93,13 @@ const soups = ref<TSoup[]>([
     id: '2',
     title: '雨夜凶杀',
     surface: '一个雨夜，有人被发现死在公园里，周围没有任何脚印。',
+    bottom: '死者是被雨伞刺死的，凶手在雨中离开，雨水冲刷了所有脚印。',
+    key_facts: [
+      '雨夜',
+      '公园里发现尸体',
+      '周围没有脚印',
+      '雨水冲刷痕迹'
+    ],
     difficulty: '中等',
     category: '悬疑',
     estimatedTime: '15分钟',
@@ -95,6 +109,13 @@ const soups = ref<TSoup[]>([
     id: '3',
     title: '密室之谜',
     surface: '一个房间从内部反锁，里面的人却消失了，窗户也无法打开。',
+    bottom: '房间有密道，人通过密道离开后从外面反锁了门。',
+    key_facts: [
+      '房间内部反锁',
+      '人消失了',
+      '窗户无法打开',
+      '存在密道'
+    ],
     difficulty: '困难',
     category: '密室',
     estimatedTime: '20分钟',
@@ -104,6 +125,13 @@ const soups = ref<TSoup[]>([
     id: '4',
     title: '时间旅行者',
     surface: '一个人声称自己来自未来，但他没有任何未来的物品或知识证明。',
+    bottom: '这个人有预知未来的能力，但不是时间旅行者，他患有某种神经系统疾病。',
+    key_facts: [
+      '声称来自未来',
+      '没有未来物品',
+      '没有未来知识',
+      '有预知能力'
+    ],
     difficulty: '中等',
     category: '科幻',
     estimatedTime: '15分钟',
@@ -113,6 +141,13 @@ const soups = ref<TSoup[]>([
     id: '5',
     title: '幽灵信件',
     surface: '一封没有寄信人地址的信出现在邮箱里，内容预言了即将发生的事情。',
+    bottom: '信是邻居写的，他通过观察和推理预测了事件，想测试收信人的反应。',
+    key_facts: [
+      '没有寄信人地址',
+      '信预言未来',
+      '邻居写的',
+      '通过观察推理'
+    ],
     difficulty: '困难',
     category: '超自然',
     estimatedTime: '20分钟',
@@ -122,8 +157,15 @@ const soups = ref<TSoup[]>([
     id: '6',
     title: '双重身份',
     surface: '一个人白天是普通上班族，夜晚却过着完全不同的生活。',
+    bottom: '这个人晚上是便衣警察，在执行秘密任务，所以需要隐藏身份。',
+    key_facts: [
+      '白天上班族',
+      '夜晚不同生活',
+      '便衣警察',
+      '秘密任务'
+    ],
     difficulty: '简单',
-    category: '生活',
+    category: '社会',
     estimatedTime: '10分钟',
     playedCount: 98
   }
