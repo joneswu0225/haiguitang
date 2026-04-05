@@ -1,6 +1,409 @@
-node_modules
-dist
-.DS_Store
-*.local
+# ============================================
+# 依赖目录
+# ============================================
+node_modules/
+.npm
+.pnpm
+.yarn/
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# ============================================
+# 构建输出
+# ============================================
+dist/
+dist-ssr/
+*.log
+
+# 前端构建输出
+frontend/dist/
+frontend/.output/
+frontend/.nuxt/
+frontend/.next/
+
+# 后端构建输出
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+
+# ============================================
+# 环境变量和配置文件
+# ============================================
 .env
 .env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.vercel
+
+# 本地配置文件
+*.local
+local.yml
+docker-compose.override.yml
+
+# ============================================
+# 操作系统文件
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# 编辑器/IDE文件
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+~*
+
+# 项目特定编辑器文件
+.project
+.classpath
+.settings/
+*.tmproj
+*.sublime-workspace
+
+# ============================================
+# Python特定文件
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/#use-with-ide
+.pdm.toml
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ============================================
+# 前端特定文件
+# ============================================
+# Vue/Nuxt
+.nuxt/
+.output/
+
+# Next.js
+.next/
+out/
+
+# Vite
+*.local
+
+# 缓存文件
+.cache/
+.temp/
+
+# 测试覆盖率
+coverage/
+.nyc_output
+
+# Storybook
+storybook-static/
+
+# ============================================
+# 数据库文件
+# ============================================
+# SQLite
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# 开发数据库
+data/
+*.db
+
+# ============================================
+# 日志文件
+# ============================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ============================================
+# 调试文件
+# ============================================
+debug/
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================
+# Vercel部署相关
+# ============================================
+# Vercel构建缓存
+.vercel/
+.vercel_build_output/
+
+# Vercel环境变量（已包含在.env部分）
+# .env.vercel
+
+# ============================================
+# 其他
+# ============================================
+# 临时文件
+tmp/
+temp/
+
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 系统文件
+.dockerignore
+.gitattributes
+.gitkeep
+
+# 大文件
+*.zip
+*.tar.gz
+*.rar
+
+# 密钥文件
+*.pem
+*.key
+*.crt
+*.csr
+
+# ============================================
+# 项目特定规则
+# ============================================
+
+# AI海龟汤项目特定文件
+# -------------------------
+
+# 开发环境数据库文件（如果使用SQLite）
+backend/data/
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# 前端开发缓存
+frontend/.vite/
+frontend/node_modules/.cache/
+frontend/node_modules/.vite/
+
+# 后端开发缓存
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.coverage
+
+# 测试报告
+test-reports/
+test-results/
+
+# 开发工具生成的文件
+*.code-workspace
+
+# 本地开发配置文件（非示例文件）
+backend/.env
+frontend/.env
+.env.development
+
+# 构建产物（已包含在通用规则中）
+# dist/  # 已包含
+# backend/dist/  # 已包含
+# frontend/dist/  # 已包含
+
+# Vercel部署特定
+# --------------
+# Vercel自动生成的配置
+.vercel/project.json
+
+# Vercel构建日志
+vercel-*.log
+
+# 项目根目录的node_modules（如果存在）- 已包含在开头
+# node_modules/
+
+# 临时测试文件（如我们之前创建的测试文件）
+test_*.py
+*_validation.py
+*_persistence.py
+
+# 开发笔记和临时文件
+notes/
+scratch/
+todo/
+ideas.md
+
+# 大文件存储（如果有）
+uploads/
+media/
+static/uploads/
+
+# 备份目录
+backup/
+backups/

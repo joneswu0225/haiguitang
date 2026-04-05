@@ -85,9 +85,60 @@ async def complete_game(game_id: str, x_user_id: Optional[str] = Header(None)):
     if game["status"] != "active":
         raise HTTPException(status_code=400, detail="游戏状态不允许完成")
     
+    # 获取游戏的所有回合
+    game_turns = get_turns_by_game_id(game_id)
+    
+    # 计算简单的接近度分数（启发式方法）
+    # 基于回合数量和回答类型计算分数
+    proximity_score = 0
+    proximity_rationale = ""
+    
+    if game_turns:
+        # 计算基础分数
+        total_turns = len(game_turns)
+        
+        # 统计不同类型的回答
+        yes_count = sum(1 for turn in game_turns if turn.get("answer") == "yes")
+        no_count = sum(1 for turn in game_turns if turn.get("answer") == "no")
+        irrelevant_count = sum(1 for turn in game_turns if turn.get("answer") == "irrelevant")
+        
+        # 启发式评分规则：
+        # 1. 每个yes回答加20分（有用的信息）
+        # 2. 每个no回答加10分（排除错误方向）
+        # 3. 每个irrelevant回答减5分（无关问题）
+        # 4. 问题数量适中（3-8个）加分
+        # 5. 最终分数在0-100之间
+        
+        base_score = (yes_count * 20) + (no_count * 10) - (irrelevant_count * 5)
+        
+        # 根据问题数量调整分数
+        if 3 <= total_turns <= 8:
+            base_score += 20  # 问题数量适中
+        elif total_turns > 8:
+            base_score -= 10  # 问题太多
+        
+        # 确保分数在0-100之间
+        proximity_score = max(0, min(100, base_score))
+        
+        # 生成评分理由
+        if proximity_score >= 80:
+            proximity_rationale = "优秀推理：问题精准，有效获取关键信息"
+        elif proximity_score >= 60:
+            proximity_rationale = "良好推理：大部分问题相关，推理方向正确"
+        elif proximity_score >= 40:
+            proximity_rationale = "一般推理：部分问题相关，需要更多关键信息"
+        else:
+            proximity_rationale = "需要改进：问题相关性不足，推理方向需要调整"
+    else:
+        # 没有回合的情况
+        proximity_score = 0
+        proximity_rationale = "没有提问记录"
+    
     updates = {
         "status": "completed",
-        "ended_at": datetime.now().isoformat()
+        "ended_at": datetime.now().isoformat(),
+        "proximity_score": proximity_score,
+        "proximity_rationale": proximity_rationale
     }
     
     update_game(game_id, updates)
